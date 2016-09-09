@@ -1,7 +1,7 @@
 nginx:
     build: ./nginx/
     ports:
-        - 8080:80
+        - 80:80
     links:
         - php
     volumes_from:
@@ -41,7 +41,7 @@ data:
 phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-        - 8081:80
+        - 8080:80
     links:
         - mysql
     environment:
