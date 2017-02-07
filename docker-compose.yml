@@ -1,5 +1,5 @@
 nginx:
-    build: ./nginx/
+    build: ./nginx
     ports:
         - 80:80
     links:
@@ -8,16 +8,18 @@ nginx:
         - app
 
 php:
-    build: ./php/
+    build: ./php
     expose:
         - 9000
     links:
         - mysql
     volumes_from:
         - app
+    environment:
+        APPLICATION_ENV: docker
 
 app:
-    image: php:7.0-fpm
+    image: php:5.6.30-fpm
     volumes:
         - ./src:/var/www/html
     command: "true"
@@ -28,9 +30,9 @@ mysql:
         - data
     environment:
         MYSQL_ROOT_PASSWORD: secret
-        MYSQL_DATABASE: project
-        MYSQL_USER: project
-        MYSQL_PASSWORD: project
+        MYSQL_DATABASE: ppod
+        MYSQL_USER: ppodApp
+        MYSQL_PASSWORD: 6j5oWHGNTeey
 
 data:
     image: mysql:latest
