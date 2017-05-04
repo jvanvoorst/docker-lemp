@@ -1,7 +1,7 @@
 nginx:
     build: ./nginx
     ports:
-        - 80:80
+        - 81:80
     links:
         - php
     volumes_from:
@@ -21,18 +21,20 @@ php:
 app:
     image: php:5.6.30-fpm
     volumes:
-        - ./src:/var/www/html
+        - ./etd/build:/var/www/html/etd
     command: "true"
 
 mysql:
     image: mysql:latest
+    volumes:
+        - ./etd/src/resources/sql:/docker-entrypoint-initdb.d
     volumes_from:
         - data
     environment:
         MYSQL_ROOT_PASSWORD: secret
-        MYSQL_DATABASE: ppod
-        MYSQL_USER: ppodApp
-        MYSQL_PASSWORD: 6j5oWHGNTeey
+        MYSQL_DATABASE: default
+        MYSQL_USER: user
+        MYSQL_PASSWORD: secret
 
 data:
     image: mysql:latest
@@ -43,7 +45,7 @@ data:
 phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-        - 8080:80
+        - 8081:80
     links:
         - mysql
     environment:
