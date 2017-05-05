@@ -21,7 +21,7 @@ php:
 app:
     image: php:5.6.30-fpm
     volumes:
-        - ./etd/build:/var/www/html/etd
+        - ./project:/var/www/html
     command: "true"
 
 mysql:
