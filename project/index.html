@@ -14,9 +14,8 @@
 
     </head>
     <body ng-app="mainApp">
-        <div>
-            <upload-component></upload-component>
-            <files></files>
+        <div ng-controller="mainCntrl">
+            <files files="filesData"></files>
         </div>
     </body>
 </html>
