@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 
-<div class="" ng-repeat="file in $ctrl.files">
-    <p>{{file}}</p>
+<div class="files-container container">
+    <div class="row" ng-repeat="file in $ctrl.files">
+        <input type="checkbox" name="" value="">
+        <a class="file-text" href="#" ng-click="$ctrl.downloadOne(file)">{{file}}</a>
+    </div>
+    <button class="btn btn-warning" type="button" name="button">Download Selected</button>
 </div>

@@ -3,26 +3,32 @@
 angular
     .module('mainApp', [])
     .controller('mainCntrl', ['$scope', '$log', 'files', function($scope, $log, files) {
-        // call files.get to get data for files component
-        files.get().then(function(res) {
-            if (res.data.constructor === Array) {
-                $scope.filesData = res.data;
+        // call files.list to get data for files component
+        files.list().then(function(res) {
+            if (res.data.constructor === Array && res.data.length > 0) {
+                $scope.files = res.data;
             } else {
                 $log.log(`Error: files.get() did not return an array, instead: ${res.data}`);
             }
         });
     }])
-    .component('uploadComponent', {
-        templateUrl: 'public/templates/uploadTemplate.html'
-    })
     .component('files', {
         templateUrl: 'public/templates/files.html',
         bindings: {
-            files: '<'
+            files: '=',
+        },
+        controller: function(files) {
+            this.downloadOne = function(file) {
+                files.get(file);
+            };
         }
     })
     .service('files', function($http) {
-        this.get = function() {
-            return $http.get('php/getFiles.php')
-        }
+        this.list = function() {
+            return $http.get('php/getFiles.php');
+        };
+        this.get = function(file) {
+            console.log(file);
+            window.location.assign('php/download.php?file=' + file);
+        };
     });
