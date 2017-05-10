@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-angular
+const app = angular
     .module('mainApp', [])
     .controller('mainCntrl', ['$scope', '$log', 'filesService', function($scope, $log, filesService) {
         // call files.list to get data for files component
@@ -14,9 +14,10 @@ angular
                 $log.log(`Error: files.list() did not return an array, instead: ${res.data}`);
             }
         });
-    }])
-    // filesComponent displays a list of files in direcotry,  download one or multiple
-    .component('filesComponent', {
+    }]);
+
+// filesComponent displays a list of files in direcotry,  download one or multiple
+app.component('filesComponent', {
         templateUrl: 'public/templates/files.html',
         bindings: {
             files: '=',
@@ -76,3 +77,15 @@ angular
         // download multiple files in zip archive
         this.getMultiple = (files) => window.location = 'php/files.php?action=getMultiple&files=' + files.join('@');
     });
+
+// upload component
+app.component('uploadComponent', {
+    templateUrl: 'public/templates/upload.html',
+    bindings: {
+
+    },
+    controller: function() {
+        
+    }
+
+});

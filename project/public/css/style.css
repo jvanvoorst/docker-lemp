@@ -1,3 +1,6 @@
 .selected {
     background-color: lightgrey;
 }
+.files-comp-container {
+    width: 500px;
+}

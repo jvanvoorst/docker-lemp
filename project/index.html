@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Upload Test</title>
+        <title>Angular Components</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,8 +17,11 @@
 
     </head>
     <body ng-app="mainApp">
-        <div ng-controller="mainCntrl">
-            <files-component files="files"></files-component>
+        <div class="container" ng-controller="mainCntrl">
+            <div class="row">
+                <files-component class="col-md-6" files="files"></files-component>
+                <upload-component class="col-md-6"></upload-component>
+            </div>
         </div>
     </body>
 </html>
