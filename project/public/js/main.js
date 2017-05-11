@@ -84,8 +84,78 @@ app.component('uploadComponent', {
     bindings: {
 
     },
-    controller: function() {
-        
+    controller: function(uploadService) {
+         this.upload = () => {
+             let form = $('form')[0];
+             let formData = new FormData(form);
+             console.log(formData);
+             uploadService.upload(formData).then((res) => {
+                 console.log(res);
+             });
+         };
+
+
     }
 
+})
+.service('uploadService', function($http) {
+
+    this.upload = (data) => {
+        return $http({
+            method: 'POST',
+            url: 'php/upload.php',
+            data: data
+        });
+    };
 });
+
+
+// app.directive('myDirective', function(uploadService) {
+//   return {
+//     restrict: 'A',
+//     link: function(scope, element, attr) {
+//       element.on('change', function() {
+//         var formData = new FormData();
+//         formData.append('file', element[0].files[0]);
+//
+//         // optional front-end logging
+//         // var fileObject = element[0].files[0];
+//         // scope.fileLog = {
+//         //   'lastModified': fileObject.lastModified,
+//         //   'lastModifiedDate': fileObject.lastModifiedDate,
+//         //   'name': fileObject.name,
+//         //   'size': fileObject.size,
+//         //   'type': fileObject.type
+//         // };
+//         // scope.$apply();
+//
+//         console.log(formData);
+//
+//         uploadService.upload('php/upload.php', formData).then((res) => {
+//             console.log(res);
+//         });
+//
+//         // ---> post request to your php file and use $_FILES in your php file   < ----
+//         // httpPostFactory('php/upload.php', formData, function (callback) {
+//         //     console.log(callback);
+//         // });
+//
+//       });
+//
+//     }
+//   };
+// });
+//
+// app.service('uploadService', function($http) {
+//
+//     this.upload = (file, data) => {
+//         return $http({
+//           url: file,
+//           method: "POST",
+//           data: data,
+//           headers: {
+//             'Content-Type': undefined
+//           }
+//       });
+//     };
+// });

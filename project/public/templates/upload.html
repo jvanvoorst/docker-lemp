@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 
-<form action="php/upload.php" method="post" enctype="multipart/form-data">
+<form id="uploadForm" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <input type="file" class="form-control" name="fileToUpload" id="fileToUpload" multiple>
     </div>
-    <input type="submit" class="btn btn-default" name="submit" value="Upload File">
+    <input class="btn btn-default" value="Upload File" ng-click="$ctrl.upload()">
 </form>
+
+<!-- <div>
+  <input my-directive type="file" name="file">
+  <p>
+    post request with this data:
+  </p>
+  <pre ng-repeat="(key, value) in fileLog">
+    {{key}} {{ value }}
+  </pre>
+</div> -->

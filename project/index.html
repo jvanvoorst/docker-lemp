@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="public/css/style.css">
 
         <!-- JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" type="text/javascript"></script>
         <script src="public/js/main.js" type="text/javascript"></script>
 
@@ -21,6 +22,15 @@
             <div class="row">
                 <files-component class="col-md-6" files="files"></files-component>
                 <upload-component class="col-md-6"></upload-component>
+                <!-- <div>
+                  <input my-directive type="file" name="file">
+                  <p>
+                    post request with this data:
+                  </p>
+                  <pre ng-repeat="(key, value) in fileLog">
+                    {{key}} {{ value }}
+                  </pre>
+                </div> -->
             </div>
         </div>
     </body>
