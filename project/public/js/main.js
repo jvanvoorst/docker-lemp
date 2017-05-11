@@ -14,6 +14,7 @@ const app = angular
                 $log.log(`Error: files.list() did not return an array, instead: ${res.data}`);
             }
         });
+
     }]);
 
 // filesComponent displays a list of files in direcotry,  download one or multiple
@@ -85,12 +86,15 @@ app.component('uploadComponent', {
 
     },
     controller: function(uploadService) {
+
          this.upload = () => {
-             let form = $('form')[0];
-             let formData = new FormData(form);
-             console.log(formData);
+            let file = document.getElementById('file').files[0];
+            let formData = new FormData();
+            formData.append('file', file);
+
              uploadService.upload(formData).then((res) => {
                  console.log(res);
+                 this.message = res.data;
              });
          };
 
@@ -104,58 +108,10 @@ app.component('uploadComponent', {
         return $http({
             method: 'POST',
             url: 'php/upload.php',
-            data: data
+            data: data,
+            headers: {
+                'Content-Type': undefined
+            }
         });
     };
 });
-
-
-// app.directive('myDirective', function(uploadService) {
-//   return {
-//     restrict: 'A',
-//     link: function(scope, element, attr) {
-//       element.on('change', function() {
-//         var formData = new FormData();
-//         formData.append('file', element[0].files[0]);
-//
-//         // optional front-end logging
-//         // var fileObject = element[0].files[0];
-//         // scope.fileLog = {
-//         //   'lastModified': fileObject.lastModified,
-//         //   'lastModifiedDate': fileObject.lastModifiedDate,
-//         //   'name': fileObject.name,
-//         //   'size': fileObject.size,
-//         //   'type': fileObject.type
-//         // };
-//         // scope.$apply();
-//
-//         console.log(formData);
-//
-//         uploadService.upload('php/upload.php', formData).then((res) => {
-//             console.log(res);
-//         });
-//
-//         // ---> post request to your php file and use $_FILES in your php file   < ----
-//         // httpPostFactory('php/upload.php', formData, function (callback) {
-//         //     console.log(callback);
-//         // });
-//
-//       });
-//
-//     }
-//   };
-// });
-//
-// app.service('uploadService', function($http) {
-//
-//     this.upload = (file, data) => {
-//         return $http({
-//           url: file,
-//           method: "POST",
-//           data: data,
-//           headers: {
-//             'Content-Type': undefined
-//           }
-//       });
-//     };
-// });
