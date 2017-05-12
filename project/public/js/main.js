@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-const app = angular
+angular
     .module('mainApp', [])
     .controller('mainCntrl', ['$scope', '$log', 'filesService', function($scope, $log, filesService) {
         // call files.list to get data for files component
@@ -18,22 +18,28 @@ const app = angular
     }]);
 
 // filesComponent displays a list of files in direcotry,  download one or multiple
-app.component('filesComponent', {
+angular.module('mainApp').component('filesComponent', {
         templateUrl: 'public/templates/files.html',
         bindings: {
             files: '=',
         },
         controller: function(filesService) {
+            let vm = this;
+            vm.getOne = getOne;
+            vm.getSelected = getSelected;
+            vm.changeSelectAll = changeSelectAll;
 
             // download file when name is clicked
-            this.getOne = (file) => filesService.get(file);
+            function getOne(file) {
+                filesService.get(file);
+            }
 
             // download all that are selected
-            this.getSelected = () => {
+            function getSelected() {
                 let selectedFilesArray = [];
 
                 // create array of file names
-                this.files.forEach((fileObj) => {
+                vm.files.forEach((fileObj) => {
                     if (fileObj.isSelected) {
                         selectedFilesArray.push(fileObj.fileName);
                     }
@@ -49,15 +55,16 @@ app.component('filesComponent', {
                         filesService.get(selectedFilesArray[0]);
                     }
                 }
-
-            };
+                vm.changeSelectAll(false);
+            }
 
             // select all files or unselect all
-            this.changeSelect = () => {
-                this.files.forEach((item) => {
-                    item.isSelected = this.selectAll;
+            function changeSelectAll(value) {
+                console.log(value);
+                vm.files.forEach((item) => {
+                    item.isSelected = value;
                 });
-            };
+            }
         }
     })
     // filesService has three functions to support filesComponent
@@ -80,7 +87,7 @@ app.component('filesComponent', {
     });
 
 // upload component
-app.component('uploadComponent', {
+angular.module('mainApp').component('uploadComponent', {
     templateUrl: 'public/templates/upload.html',
     bindings: {
 
