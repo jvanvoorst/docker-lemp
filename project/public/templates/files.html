@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<div class="container files-comp-container">
+
+    <ul class="list-group">
+
+        <li class="list-group-item">
+            <div class="checkbox">
+                <input type="checkbox" ng-model="$ctrl.selectAll" ng-click="$ctrl.changeSelectAll($ctrl.selectAll)">
+                <span>Select All</span>
+            </div>
+        </li>
+
+        <li class="list-group-item" ng-repeat="item in $ctrl.files" ng-class="{'selected': item.isSelected}">
+            <div class="checkbox">
+                <input type="checkbox" ng-model="item.isSelected">
+                <a class="" href="#" ng-click="$ctrl.getOne(item.fileName)">{{item.fileName}}</a>
+            </div>
+        </li>
+
+    </ul>
+
+    <button class="btn btn-default" type="button" name="button" ng-click="$ctrl.getSelected()">Download Selected</button>
+
+</div>

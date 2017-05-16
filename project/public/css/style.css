@@ -1,0 +1,9 @@
+.selected {
+    background-color: lightgrey;
+}
+.files-comp-container {
+    width: 500px;
+}
+.message {
+    padding-left: 15px;
+}
